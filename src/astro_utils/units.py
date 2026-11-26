@@ -7,9 +7,9 @@ kpc = const.kpc.cgs.value
 Msol = const.M_sun.cgs.value
 Myr = ((1.*u.Myr).to(u.s).value)
 
-def _read_units_from_file(fname):
-    print("reading file: ", fname)
-    f = h5py.File(fname, "r")
+def _read_units_from_file(f):
+    #print("reading file: ", fname)
+    #f = h5py.File(fname, "r")
     # get momentum boundaries from file
     try:
         UnitMass = f[u'Parameters'].attrs.get("UnitMass_in_g")
@@ -18,7 +18,7 @@ def _read_units_from_file(fname):
         #BoxSize  = f[u'Parameters'].attrs.get("BoxSize")
     except:
         print("Unit parameters not found!!!")
-    f.close()
+    #f.close()
     return _compute_arepo_units(UnitMass, UnitLen, UnitVelo)
 
 def _compute_arepo_units(UnitMass, UnitLength, UnitVelocity, print_units=False):
